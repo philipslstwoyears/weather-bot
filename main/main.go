@@ -6,22 +6,13 @@ import (
 	"log"
 	"net/http"
 	"strings"
+	"tg_bots/dto"
 
 	"github.com/mymmrac/telego"
 	tu "github.com/mymmrac/telego/telegoutil"
 )
 
 const weatherAPIKey = "90c64572496d9b5e97108df48307cefc" // Замените на ваш API-ключ
-
-// WeatherResponse для парсинга ответа от API
-type WeatherResponse struct {
-	Weather []struct {
-		Description string `json:"description"`
-	} `json:"weather"`
-	Main struct {
-		Temp float64 `json:"temp"`
-	} `json:"main"`
-}
 
 func getWeather(city string) (string, error) {
 	// Формирование запроса к API
@@ -36,7 +27,7 @@ func getWeather(city string) (string, error) {
 		return "", fmt.Errorf("не удалось получить погоду для города %s", city)
 	}
 
-	var weather WeatherResponse
+	var weather dto.WeatherResponse
 	err = json.NewDecoder(resp.Body).Decode(&weather)
 	if err != nil {
 		return "", err
