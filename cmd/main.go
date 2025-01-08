@@ -31,3 +31,5 @@ func main() {
 	// Получаем обновления и обрабатываем их
 	internal.GetUpdates(bot)
 }
+
+// конец
