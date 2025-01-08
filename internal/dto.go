@@ -1,4 +1,4 @@
-package dto
+package internal
 
 type WeatherResponse struct {
 	Weather []struct {
