@@ -3,7 +3,10 @@ package internal
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/joho/godotenv"
+	"log"
 	"net/http"
+	"os"
 )
 
 // преобразую температура в фаренгейты для англичан
@@ -11,7 +14,20 @@ func celsiusToFahrenheit(celsius float64) float64 {
 	return (celsius * 9 / 5) + 32
 }
 
-const weatherAPIKey = "90c64572496d9b5e97108df48307cefc" // Замените на ваш API-ключ
+// const weatherAPIKey = "90c64572496d9b5e97108df48307cefc" // Замените на ваш API-ключ
+var weatherAPIKey string
+
+func init() {
+	err := godotenv.Load("cmd/.env")
+	if err != nil {
+		log.Fatal("Ошибка при загрузке .env файла: ", err)
+	}
+
+	weatherAPIKey = os.Getenv("WEATHER_API_KEY")
+	if weatherAPIKey == "" {
+		log.Fatal("Укажите WEATHER_API_KEY в переменных окружения")
+	}
+}
 
 func GetWeather(city, lang string) (string, error) {
 	// Формирование запроса к API

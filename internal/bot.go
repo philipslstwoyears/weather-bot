@@ -8,6 +8,13 @@ import (
 	"strings"
 )
 
+// SendWelcomeMessage отправляет приветственное сообщение пользователю
+func SendWelcomeMessage(bot *telego.Bot, chatID int64, message string) error {
+	msg := tu.Message(tu.ID(chatID), message)
+	_, err := bot.SendMessage(msg)
+	return err
+}
+
 // Карта для хранения языковых предпочтений пользователей
 var UserLanguage = make(map[int64]string)
 

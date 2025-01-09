@@ -28,6 +28,16 @@ func main() {
 		log.Fatal(err)
 	}
 
+	// Получаем свой Chat ID (замените на нужный ID пользователя)
+	//chatID := int64(2039699453) // Введите правильный chatID для отправки приветствия
+	//
+	//// Отправляем приветственное сообщение
+	//welcomeMessage := "Привет! Я готов предоставить информацию о погоде. Введите название города."
+	//err = internal.SendWelcomeMessage(bot, chatID, welcomeMessage)
+	//if err != nil {
+	//	log.Printf("Ошибка отправки приветственного сообщения: %v", err)
+	//}
+
 	// Получаем обновления и обрабатываем их
 	internal.GetUpdates(bot)
 }
